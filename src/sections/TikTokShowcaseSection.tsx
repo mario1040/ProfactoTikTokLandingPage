@@ -4,6 +4,7 @@ import { SITE_ASSETS, SITE_COPY } from '../config/site';
 import type { Language } from '../types/analytics';
 import { trackTikTokProfileClick } from '../utils/tiktokPixel';
 import { ArchitecturalImage } from '../components/common/ArchitecturalImage';
+import { BidiText } from '../components/common/BidiText';
 import { ProfactoLogo } from '../components/common/ProfactoLogo';
 
 interface TikTokShowcaseSectionProps {
@@ -49,7 +50,7 @@ export function TikTokShowcaseSection({ lang }: TikTokShowcaseSectionProps) {
               {SITE_COPY.tiktokShowcase.title[lang]}
             </h2>
             <p className="text-sm sm:text-base text-[#4A4644] leading-relaxed">
-              {SITE_COPY.tiktokShowcase.description[lang]}
+              <BidiText text={SITE_COPY.tiktokShowcase.description[lang]} />
             </p>
           </div>
 
@@ -61,31 +62,15 @@ export function TikTokShowcaseSection({ lang }: TikTokShowcaseSectionProps) {
               </span>
             </div>
 
-            <div className="grid grid-cols-3 gap-3 py-4 border-y border-[#E5E2DE] text-center">
-              <div>
-                <span className="font-en-brand text-xl font-bold text-[#0F0E0E] tabular-nums block">
-                  {PROFACTO_BRAND.verifiedTikTokStats.videos}
-                </span>
-                <span className="text-xs text-[#5C5856]">
-                  {isAr ? 'فيديو منشور' : 'Videos'}
-                </span>
-              </div>
-              <div>
-                <span className="font-en-brand text-xl font-bold text-[#0F0E0E] tabular-nums block">
-                  {PROFACTO_BRAND.verifiedTikTokStats.likes}
-                </span>
-                <span className="text-xs text-[#5C5856]">
-                  {isAr ? 'إعجاب' : 'Likes'}
-                </span>
-              </div>
-              <div>
-                <span className="font-en-brand text-xl font-bold text-[#0F0E0E] tabular-nums block">
-                  {PROFACTO_BRAND.verifiedTikTokStats.followers}
-                </span>
-                <span className="text-xs text-[#5C5856]">
-                  {isAr ? 'متابع' : 'Followers'}
-                </span>
-              </div>
+            <div className="py-4 border-y border-[#E5E2DE] space-y-1.5">
+              <p className="text-sm font-medium text-[#0F0E0E] leading-relaxed">
+                {isAr ? PROFACTO_BRAND.verifiedBioAr : PROFACTO_BRAND.verifiedBioEn}
+              </p>
+              <p className="text-xs text-[#5C5856]">
+                {isAr
+                  ? 'شاهد أحدث الفيديوهات والمشاريع مباشرة على حساب تيك توك الرسمي.'
+                  : 'Watch our latest reels and interior showcases directly on TikTok.'}
+              </p>
             </div>
 
             <a
@@ -95,7 +80,9 @@ export function TikTokShowcaseSection({ lang }: TikTokShowcaseSectionProps) {
               onClick={() => trackTikTokProfileClick('showcase_card')}
               className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg bg-[#0F0E0E] text-white text-sm font-semibold hover:bg-[#BF2531] transition-colors min-h-[44px]"
             >
-              <span>{SITE_COPY.tiktokShowcase.ctaLabel[lang]}</span>
+              <span>
+                <BidiText text={SITE_COPY.tiktokShowcase.ctaLabel[lang]} />
+              </span>
               <ExternalLink className="w-4 h-4 shrink-0" aria-hidden="true" />
             </a>
           </div>
@@ -125,7 +112,9 @@ export function TikTokShowcaseSection({ lang }: TikTokShowcaseSectionProps) {
                       <h3 className="text-base font-bold text-white">
                         {card.title}
                       </h3>
-                      <p className="text-xs text-white/80 mt-0.5">{card.subtitle}</p>
+                      <p className="text-xs text-white/80 mt-0.5">
+                        <BidiText text={card.subtitle} />
+                      </p>
                     </div>
                     <span className="w-9 h-9 rounded-full bg-[#BF2531] text-white inline-flex items-center justify-center shrink-0">
                       <Play className="w-4 h-4" aria-hidden="true" />
@@ -138,7 +127,7 @@ export function TikTokShowcaseSection({ lang }: TikTokShowcaseSectionProps) {
         </div>
 
         <p className="text-xs text-[#5C5856]">
-          {SITE_COPY.tiktokShowcase.limitationNote[lang]}
+          <BidiText text={SITE_COPY.tiktokShowcase.limitationNote[lang]} />
         </p>
       </div>
     </section>

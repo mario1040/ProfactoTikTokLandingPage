@@ -86,10 +86,13 @@ export function HeroSection({ lang, onToggleLang }: HeroSectionProps) {
             {/* Verified Unboxed Proof Strip */}
             <div className="pt-5 border-t border-[#E5E2DE] flex flex-wrap items-center gap-x-3 gap-y-2 text-xs sm:text-sm text-[#5C5856]">
               {SITE_COPY.hero.proofItems[lang].map((item, idx) => {
-                const phoneToken = '+20 11 06365101';
-                const hasPhone = item.includes(phoneToken);
-                const [beforePhone, afterPhone] = hasPhone
-                  ? item.split(phoneToken)
+                const ltrToken = item.includes('+20 11 06365101')
+                  ? '+20 11 06365101'
+                  : item.includes('@profactoo1')
+                    ? '@profactoo1'
+                    : null;
+                const [beforeToken, afterToken] = ltrToken
+                  ? item.split(ltrToken)
                   : [item, ''];
 
                 return (
@@ -100,13 +103,13 @@ export function HeroSection({ lang, onToggleLang }: HeroSectionProps) {
                       </span>
                     )}
                     <span className="tabular-nums">
-                      {hasPhone ? (
+                      {ltrToken ? (
                         <>
-                          {beforePhone}
+                          {beforeToken}
                           <span dir="ltr" className="inline-block font-en-brand">
-                            {phoneToken}
+                            {ltrToken}
                           </span>
-                          {afterPhone}
+                          {afterToken}
                         </>
                       ) : (
                         item

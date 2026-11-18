@@ -63,12 +63,12 @@ export const SITE_COPY = {
     },
     proofItems: {
       ar: [
-        '41 فيديو منشور على تيك توك',
+        'حسابنا الرسمي @profactoo1 على تيك توك',
         'تصميم وتنفيذ حسب المساحة',
         'استشارة مباشرة على +20 11 06365101',
       ],
       en: [
-        '41 Published TikTok Reels',
+        'Official TikTok @profactoo1',
         'Tailored Architectural Fit',
         'Direct Consultation via +20 11 06365101',
       ],
@@ -254,16 +254,16 @@ export const SITE_COPY = {
       en: 'Explore Profacto Reels on @profactoo1',
     },
     description: {
-      ar: 'نشارك عبر حسابنا الرسمي @profactoo1 مقاطع قصيرة تستعرض المطابخ وغرف الملابس المخصصة. وبسبب قيود العرض التلقائي خارج تطبيق تيك توك، يمكنك فتح الحساب الرسمي مباشرة لمشاهدة الفيديوهات الـ 41 المنشورة.',
-      en: 'We publish short-form showcases of custom kitchens and dressing rooms on @profactoo1. Because TikTok restricts automated third-party feed previews outside the app, open our official profile directly to watch all 41 published videos.',
+      ar: 'نشارك عبر حسابنا الرسمي @profactoo1 مقاطع قصيرة تستعرض المطابخ وغرف الملابس المخصصة. يمكنك فتح الحساب الرسمي مباشرة لمشاهدة أحدث الفيديوهات والأعمال المنشورة.',
+      en: 'We publish short-form showcases of custom kitchens and dressing rooms on @profactoo1. Open our official TikTok profile directly to watch our latest published reels and project highlights.',
     },
     ctaLabel: {
       ar: 'افتح حساب @profactoo1 على تيك توك',
       en: 'Open @profactoo1 on TikTok',
     },
     limitationNote: {
-      ar: 'ملاحظة شفافية: الإحصائيات المعروضة (41 فيديو · 110 إعجاب) موثقة من صفحة الحساب الرسمية على تيك توك وقت إعداد الموقع.',
-      en: 'Transparency note: Profile statistics (41 videos · 110 likes) reflect verified public profile metadata from @profactoo1.',
+      ar: 'تُضاف أحدث الأعمال والمقاطع الجديدة باستمرار على الحساب الرسمي @profactoo1 على تيك توك.',
+      en: 'New reels and project showcases are published directly on our official TikTok profile @profactoo1.',
     },
   },
   faq: {
@@ -302,8 +302,8 @@ export const SITE_COPY = {
           en: 'Where can I watch Profacto videos and showcases?',
         },
         answer: {
-          ar: 'يمكنك مشاهدة جميع الفيديوهات المنشورة (41 فيديو) مباشرة عبر حسابنا الرسمي على تيك توك: tiktok.com/@profactoo1.',
-          en: 'You can browse all 41 published reels directly on our official TikTok account at tiktok.com/@profactoo1.',
+          ar: 'يمكنك مشاهدة أحدث الفيديوهات والأعمال المنشورة مباشرة عبر حسابنا الرسمي على تيك توك: tiktok.com/@profactoo1.',
+          en: 'You can browse our latest published reels directly on our official TikTok account at tiktok.com/@profactoo1.',
         },
       },
       {

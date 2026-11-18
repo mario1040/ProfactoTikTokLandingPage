@@ -4,6 +4,7 @@ import { SITE_COPY } from '../config/site';
 import type { Language } from '../types/analytics';
 import { trackViewContent } from '../utils/tiktokPixel';
 import { ArchitecturalImage } from '../components/common/ArchitecturalImage';
+import { BidiText } from '../components/common/BidiText';
 import { WhatsAppButton } from '../components/WhatsAppButton';
 
 interface ServicesSectionProps {
@@ -202,7 +203,7 @@ export function ServicesSection({ lang }: ServicesSectionProps) {
         </div>
 
         <p className="text-xs text-[#5C5856]">
-          {SITE_COPY.specialtiesSection.visualNote[lang]}
+          <BidiText text={SITE_COPY.specialtiesSection.visualNote[lang]} />
         </p>
       </div>
     </section>

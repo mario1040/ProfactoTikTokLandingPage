@@ -18,11 +18,6 @@ export const PROFACTO_BRAND = {
   logoAssetPath: '/assets/profacto-avatar.jpg',
   verifiedBioEn: 'Profacto specializes in high-end, custom kitchens and dressing rooms.',
   verifiedBioAr: 'تتخصص Profacto في تصميم وتنفيذ المطابخ الفاخرة وغرف الملابس المخصصة.',
-  verifiedTikTokStats: {
-    videos: 41,
-    likes: 110,
-    followers: 21,
-  },
   contact: {
     phoneInternational: '+201106365101',
     phoneDisplay: '+20 11 06365101',

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { SITE_COPY } from '../config/site';
 import type { Language } from '../types/analytics';
+import { BidiText } from '../components/common/BidiText';
 
 interface FAQSectionProps {
   lang: Language;
@@ -49,7 +50,7 @@ export function FAQSection({ lang }: FAQSectionProps) {
                     id={`faq-panel-${item.id}`}
                     className="px-5 sm:px-6 pb-5 text-sm text-[#4A4644] leading-relaxed"
                   >
-                    {item.answer[lang]}
+                    <BidiText text={item.answer[lang]} />
                   </div>
                 )}
               </div>
