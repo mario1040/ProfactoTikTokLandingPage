@@ -9,7 +9,6 @@ import {
 } from './utils/tiktokPixel';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { CookieConsent } from './components/CookieConsent';
 import { PrivacyModal } from './components/PrivacyModal';
 import { HeroSection } from './sections/HeroSection';
 import { ServicesSection } from './sections/ServicesSection';
@@ -32,12 +31,10 @@ export default function App() {
     html.dir = lang === 'ar' ? 'rtl' : 'ltr';
   }, [lang]);
 
-  // Capture campaign attribution (UTMs + ttclid) and initialize Pixel once if consent granted
+  // Capture campaign attribution (UTMs + ttclid) and initialize TikTok Pixel immediately on open
   useEffect(() => {
     captureAttribution();
-    if (getConsentStatus() === 'granted') {
-      initTikTokPixel();
-    }
+    initTikTokPixel();
   }, []);
 
   const handleGrantConsent = () => {
@@ -67,14 +64,6 @@ export default function App() {
         lang={lang}
         onToggleLang={setLang}
         onOpenPrivacy={() => setPrivacyOpen(true)}
-      />
-
-      <CookieConsent
-        lang={lang}
-        consentStatus={consentStatus}
-        onAccept={handleGrantConsent}
-        onReject={handleDenyConsent}
-        onOpenDetails={() => setPrivacyOpen(true)}
       />
 
       <PrivacyModal

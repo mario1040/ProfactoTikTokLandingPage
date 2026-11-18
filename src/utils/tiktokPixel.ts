@@ -42,16 +42,16 @@ const viewedContentKeys = new Set<string>();
 const lastActionTimestamp = new Map<string, number>();
 
 export function getConsentStatus(): ConsentStatus {
-  if (typeof window === 'undefined') return 'pending';
+  if (typeof window === 'undefined') return 'granted';
   try {
     const stored = window.localStorage.getItem(CONSENT_STORAGE_KEY);
-    if (stored === 'granted' || stored === 'denied') {
-      return stored;
+    if (stored === 'denied') {
+      return 'denied';
     }
   } catch {
     // Ignore storage read restrictions
   }
-  return 'pending';
+  return 'granted';
 }
 
 export function setConsentStatus(status: Exclude<ConsentStatus, 'pending'>): void {

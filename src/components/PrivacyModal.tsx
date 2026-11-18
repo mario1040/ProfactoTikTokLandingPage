@@ -62,8 +62,8 @@ export function PrivacyModal({
             </h3>
             <p>
               {isAr
-                ? `يستخدم هذا الموقع تقنية TikTok Pixel (المعرّف: ${PROFACTO_BRAND.tracking.tiktokPixelId}) لقياس زيارات الصفحات وتفاعلات طلب الاستشارة عبر واتساب أو الهاتف عند موافقتك على التتبع الإعلاني.`
-                : `This site uses the official TikTok Pixel (${PROFACTO_BRAND.tracking.tiktokPixelId}) to measure page visits and direct WhatsApp or phone consultation clicks only when you grant advertising tracking consent.`}
+                ? `يستخدم هذا الموقع تقنية TikTok Pixel (المعرّف: ${PROFACTO_BRAND.tracking.tiktokPixelId}) لقياس زيارات الصفحات وتفاعلات طلب الاستشارة عبر واتساب أو الهاتف تلقائياً، ويمكنك إيقاف التتبع الإعلاني من هنا في أي وقت.`
+                : `This site uses the official TikTok Pixel (${PROFACTO_BRAND.tracking.tiktokPixelId}) to measure page visits and direct WhatsApp or phone consultation clicks, and you can opt out below at any time.`}
             </p>
           </div>
 

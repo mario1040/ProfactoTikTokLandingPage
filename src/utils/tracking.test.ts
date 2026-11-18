@@ -13,6 +13,7 @@ import {
   canSendServerEventsApi,
 } from './eventsApiBlueprint';
 import {
+  getConsentStatus,
   resetTrackingGuardsForTest,
   shouldAllowActionDispatch,
   trackConfirmedSchedule,
@@ -23,11 +24,12 @@ import {
 } from './tiktokPixel';
 import { buildProfactoWhatsAppMessage, getProfactoWhatsAppHref } from './whatsapp';
 
-test('brand configuration uses exact Profacto Pixel ID and WhatsApp number', () => {
+test('brand configuration uses exact Profacto Pixel ID and WhatsApp number and immediate tracking default', () => {
   assert.equal(PROFACTO_BRAND.tracking.tiktokPixelId, 'DBUOAARC77UCDH70RRQ0');
   assert.equal(PROFACTO_BRAND.contact.phoneInternational, '+201106365101');
   assert.equal(PROFACTO_BRAND.contact.whatsappNumber, '201106365101');
   assert.equal(PROFACTO_BRAND.tiktokUrl, 'https://www.tiktok.com/@profactoo1');
+  assert.equal(getConsentStatus(), 'granted');
 });
 
 test('attribution parser captures UTM parameters and ttclid when present, and never invents them when absent', () => {

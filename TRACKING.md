@@ -6,11 +6,9 @@
 - **SDK Loader**: `src/utils/tiktokPixel.ts`
 - **Initialization Rule**: Loads `https://analytics.tiktok.com/i18n/pixel/events.js?sdkid=DBUOAARC77UCDH70RRQ0&lib=ttq` **at most once** per session, guarded by module state and `window.__PROFACTO_TTQ_INITIALIZED__`.
 
-## 2. Consent Management
-- Consent status is persisted in `localStorage` (`profacto_tracking_consent_v1`) as `'pending' | 'granted' | 'denied'`.
-- On initial visit (`'pending'`) or if `'denied'`, the third-party TikTok Pixel SDK is **not injected** and non-essential advertising cookies are not set.
-- Clicking **Accept / موافقة** immediately invokes `initTikTokPixel()`, loads the SDK once, and fires the base `PageView`.
-- Users can update preferences anytime via the **Tracking & Cookie Preferences** button in the footer.
+## 2. Immediate Tracking & Privacy Controls
+- Consent status in `localStorage` (`profacto_tracking_consent_v1`) defaults to `'granted'` so the TikTok Pixel initializes immediately when the website opens and captures `PageView` without a blocking cookie banner.
+- Visitors who wish to opt out can open **Privacy Policy / سياسة الخصوصية** in the footer and switch to **Essential Only**, persisting `'denied'`.
 
 ## 3. Event Strategy
 | Visitor Action | Event Name | Implementation | Notes |
