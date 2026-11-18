@@ -1,0 +1,6 @@
+{
+  "name": "Profacto — Custom Kitchens & Dressing Rooms",
+  "description": "Official Profacto website specializing in high-end custom kitchens and dressing rooms, with direct WhatsApp consultation and TikTok Pixel conversion tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

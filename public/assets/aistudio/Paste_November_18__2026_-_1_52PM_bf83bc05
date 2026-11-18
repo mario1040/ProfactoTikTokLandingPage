@@ -1,0 +1,948 @@
+# PROFACTO — COMPLETE BRAND WEBSITE & ADVANCED TIKTOK TRACKING IMPLEMENTATION
+
+## ROLE & OBJECTIVE
+
+Act as a Senior Software Architect, Senior Full-Stack Developer, Creative Director, Brand Strategist, UI/UX Designer, Conversion Rate Optimization Specialist, and Marketing Analytics Engineer.
+
+Your mission is to PLAN, DESIGN, DEVELOP, IMPLEMENT, AND VERIFY a complete, premium, production-ready landing page for **PROFACTO**.
+
+This website will serve as the official digital conversion destination for visitors arriving from TikTok organic content and paid TikTok advertising campaigns.
+
+This is a NEW, INDEPENDENT PROJECT.
+
+Do not copy, modify, or inherit the previous Professor Kitchens / Professor Atelier landing page, its code, business information, conversion configuration, or advertising tracking.
+
+The result must be a distinctive Profacto website with a properly configured TikTok Pixel, accurate conversion tracking, attribution preservation, and a clear customer journey.
+
+---
+
+# PART 1 — OFFICIAL BUSINESS CONFIGURATION
+
+Use these exact business details throughout the project.
+
+### Brand
+
+Brand Name: Profacto
+
+Official TikTok Account:
+https://www.tiktok.com/@profactoo1
+
+### Official Contact Number
+
+International phone number:
++201106365101
+
+Formatted display number:
++20 11 06365101
+
+WhatsApp Direct Link:
+https://wa.me/201106365101
+
+All WhatsApp CTAs must use this number.
+
+Do not use the old Professor Kitchens number.
+
+### TikTok Pixel
+
+Official Profacto TikTok Pixel ID:
+
+DBUOAARC77UCDH70RRQ0
+
+This is the actual Pixel ID supplied for this project.
+
+Use this exact ID in the frontend configuration.
+
+Create this environment configuration:
+
+VITE_PROFACTO_TIKTOK_PIXEL_ID=DBUOAARC77UCDH70RRQ0
+
+Do not replace it with a placeholder or another Pixel ID.
+
+### Centralized Business Configuration
+
+Create a central configuration file, such as:
+
+`src/config/brand.ts`
+
+It should contain:
+
+- Brand name.
+- Official TikTok URL.
+- Contact phone number.
+- WhatsApp number.
+- WhatsApp URL builder.
+- TikTok Pixel ID.
+- Brand colors.
+- Typography.
+- Website language settings.
+
+Avoid scattering hardcoded contact information and tracking IDs across components.
+
+---
+
+# PART 2 — BRAND DISCOVERY & BUSINESS RESEARCH
+
+Before designing the website, investigate the actual Profacto business.
+
+Use:
+
+1. Official TikTok profile: https://www.tiktok.com/@profactoo1
+2. Supplied Profacto Brand Guideline PDF (2026).
+3. Actual assets and information provided within the project.
+4. Any available official external links.
+
+Analyze the TikTok account to understand:
+
+- Business description.
+- Products and services.
+- Target audience.
+- Brand positioning.
+- Video content.
+- Featured products.
+- Marketing language.
+- Customer problems.
+- Competitive advantages.
+- Common questions.
+- Contact methods.
+- Offers and calls to action, if verified.
+
+Use the brand's published content to understand its communication style and visual identity.
+
+If the profile or some videos cannot be accessed, clearly state the limitation.
+
+Do not invent products, prices, services, technical specifications, addresses, guarantees, customer testimonials, or business claims.
+
+Use verified business information only.
+
+The website should accurately represent what Profacto actually does.
+
+---
+
+# PART 3 — OFFICIAL BRAND IDENTITY
+
+The supplied 2026 Brand Guideline is the primary design reference.
+
+Follow its identity, proportions, logo usage, typography, and color system.
+
+### 3.1 Official Colors
+
+Primary Red:
+#BF2531
+
+Primary Black:
+#0F0E0E
+
+White:
+#FFFFFF
+
+Use compatible neutral grayscale shades and secondary red tones where appropriate.
+
+The brand experience should balance:
+
+- White/light backgrounds.
+- Strong black/dark sections.
+- Distinctive red sections and accents.
+- Clear typography.
+- Elegant negative space.
+
+### 3.2 Typography
+
+English:
+Arial Rounded MT.
+
+Arabic:
+Noto Kufi Arabic.
+
+Use local brand font files if supplied.
+
+If unavailable, use appropriate fallbacks that preserve the intended visual identity.
+
+### 3.3 Logo
+
+Use the actual official Profacto logo.
+
+Respect:
+- Approved logo variations.
+- Exclusion zones.
+- Proportions.
+- Background compatibility.
+- Clear-space requirements.
+
+Never distort or recreate the official logo using generic typography.
+
+### 3.4 Visual Direction
+
+Create a distinctive and modern brand experience.
+
+It must look like a professionally designed brand website, not a generic AI template.
+
+Do not use:
+- Professor Atelier's gold color palette.
+- Unrelated kitchen imagery.
+- Generic SaaS dashboard layouts.
+- Excessive gradients.
+- Unnecessary glassmorphism.
+- Excessive decorative animations.
+- Random colors outside the identity.
+
+Prioritize clean composition, strong typography, intentional use of red, high-quality media, and clear visual hierarchy.
+
+The default website experience should support Arabic RTL and English LTR wherever appropriate to the verified audience and brand communication.
+
+---
+
+# PART 4 — LANDING PAGE STRUCTURE
+
+Develop a complete landing page based on the actual Profacto business.
+
+Use the sections below as a flexible structure.
+
+Adapt them according to the verified products, services, and target audience.
+
+### 4.1 Header
+
+Include:
+- Official Profacto logo.
+- Navigation.
+- Products/services.
+- About.
+- Gallery/portfolio if applicable.
+- Contact.
+- Primary CTA.
+
+Build a modern responsive mobile navigation menu.
+
+### 4.2 Hero Section
+
+The hero must immediately communicate what Profacto offers.
+
+Include:
+- A powerful verified headline.
+- A concise value proposition.
+- Strong visual media.
+- Primary WhatsApp CTA.
+- Secondary exploration CTA.
+- Relevant proof points, where verified.
+
+The design must be mobile-first because a significant portion of traffic will arrive directly from TikTok.
+
+### 4.3 Products & Services
+
+Create visually attractive sections for actual products and services.
+
+Use:
+- Product cards.
+- Service cards.
+- Details and specifications.
+- Benefits.
+- Product galleries.
+- Relevant media.
+
+Do not fabricate missing information.
+
+### 4.4 Why Profacto
+
+Present actual competitive advantages and brand differentiators.
+
+Use professional visual storytelling.
+
+### 4.5 Gallery & TikTok Showcase
+
+Use actual Profacto brand content wherever available.
+
+Provide:
+- Featured images.
+- Real project/product photography.
+- TikTok videos.
+- Selected video embeds.
+- Links to original TikTok content.
+
+Use optimized thumbnails when official embeds are unavailable.
+
+Never present stock photos as actual Profacto work.
+
+### 4.6 How It Works
+
+Explain the actual customer journey and business process, once verified.
+
+### 4.7 Social Proof
+
+Use genuine customer feedback, verified projects, and real testimonials only.
+
+Never create fictional reviews.
+
+### 4.8 FAQ
+
+Prepare useful answers based on actual products, services, and customer questions.
+
+### 4.9 Contact & Conversion
+
+Create a prominent contact section with:
+
+Official WhatsApp:
++20 11 06365101
+
+Official TikTok:
+https://www.tiktok.com/@profactoo1
+
+Provide clear, prominent, working contact actions.
+
+### 4.10 Footer
+
+Include the brand identity, navigation, verified contact details, official TikTok link, and copyright.
+
+---
+
+# PART 5 — COMPLETE TIKTOK PIXEL IMPLEMENTATION
+
+THIS SECTION IS A CRITICAL REQUIREMENT.
+
+Do not merely install the Pixel script.
+
+Implement an organized and maintainable conversion tracking architecture.
+
+## 5.1 Pixel Configuration
+
+Official Pixel ID:
+
+DBUOAARC77UCDH70RRQ0
+
+Environment variable:
+
+`VITE_PROFACTO_TIKTOK_PIXEL_ID=DBUOAARC77UCDH70RRQ0`
+
+Initialize the official TikTok Pixel using the currently supported TikTok Pixel JavaScript SDK.
+
+Implement the base code using a dedicated tracking utility.
+
+Suggested file:
+
+`src/utils/tiktokPixel.ts`
+
+Requirements:
+
+1. Load the official TikTok Pixel SDK.
+2. Initialize the exact Profacto Pixel ID.
+3. Initialize only once.
+4. Prevent duplicate initialization caused by React re-renders.
+5. Handle asynchronous SDK loading safely.
+6. Avoid breaking the website if tracking is unavailable.
+7. Expose reusable tracking functions.
+8. Ensure the Pixel is loaded before user conversion interactions.
+9. Do not install multiple copies of the same Pixel.
+10. Do not reuse any previous project's Pixel ID.
+
+Do not create a second manual installation if the Pixel already exists in the application.
+
+## 5.2 Event Tracking Strategy
+
+Use TikTok's currently supported standard event names.
+
+Implement the following tracking map:
+
+| Visitor Behavior | TikTok Event | When to Fire |
+|---|---|---|
+| Initial website visit | PageView | On initial page load through the Pixel base code |
+| Important content viewing | ViewContent | When the visitor genuinely views the main products/services content |
+| WhatsApp CTA click | Contact | When the visitor clicks to initiate a WhatsApp conversation |
+| Phone contact click | Contact | When the visitor clicks the phone contact link |
+| Email contact click | Contact | When the visitor initiates email contact |
+| Successful lead form submission | Lead | Only after the real submission is confirmed |
+| Confirmed appointment | Schedule | Only after an actual booking is confirmed |
+| TikTok profile click | Custom event: TikTokProfileClick | When a visitor opens Profacto's TikTok profile |
+
+Important:
+
+**A WhatsApp click is a Contact intent, not a confirmed Lead.**
+
+Opening WhatsApp does not prove that the visitor actually sent a message.
+
+Therefore:
+
+- Fire Contact when the visitor clicks the WhatsApp CTA.
+- Do not fire Lead for a WhatsApp click.
+- Do not fire Schedule for a WhatsApp click.
+- Do not fire Purchase without a real purchase.
+- Do not send multiple standard conversion events for the same action.
+
+Use a custom TikTokProfileClick event only if the corresponding custom event is configured and verified in TikTok Events Manager. Otherwise, record the profile click in internal website analytics.
+
+## 5.3 PageView
+
+The TikTok Pixel base code normally generates the initial PageView event.
+
+Do not manually fire another PageView on initial load if the base SDK already sends it.
+
+For a single-page landing page, avoid unnecessary duplicate PageView tracking.
+
+If multiple client-side routes are introduced later, handle route changes separately and ensure each page view is recorded only once.
+
+## 5.4 ViewContent
+
+Track important business content.
+
+Examples:
+
+- Main services section.
+- Featured products section.
+- Important product detail content.
+
+Use IntersectionObserver or an equivalent approach.
+
+Rules:
+
+- Require meaningful visibility.
+- Trigger only once per intended content impression.
+- Do not send events on every scroll.
+- Include useful, accurate content parameters.
+- Do not invent content IDs or product values.
+
+## 5.5 Contact — WhatsApp Tracking
+
+This is the primary conversion action.
+
+Every WhatsApp CTA must use a centralized helper.
+
+Suggested implementation:
+
+`openProfactoWhatsApp(context)`
+
+The helper must:
+
+1. Build the official WhatsApp URL.
+2. Prepare a concise Arabic message.
+3. Include the relevant section or product context when available.
+4. Fire exactly one Contact event.
+5. Avoid duplicate tracking from repeated React callbacks.
+6. Open the correct WhatsApp conversation.
+7. Preserve the original landing page where appropriate.
+8. Work properly on mobile and desktop.
+
+Default pre-filled message:
+
+"مرحباً Profacto، وصلت إليكم من خلال الموقع وأرغب في معرفة المزيد عن خدماتكم."
+
+For contextual CTAs, personalize the message without inventing product or service names.
+
+Create:
+
+`https://wa.me/201106365101?text=...`
+
+Use URL encoding correctly.
+
+Do not trigger Contact, Lead, and Schedule together.
+
+A user clicking multiple genuinely separate WhatsApp CTAs may generate separate Contact actions. Prevent duplicate events for the same physical action.
+
+## 5.6 Lead Tracking
+
+There is an important distinction between an inquiry click and an actual submitted lead.
+
+Only implement Lead when one of these situations exists:
+
+- A real lead form was submitted successfully.
+- A backend confirmed and stored an actual inquiry.
+- A verified integration confirmed the lead creation.
+
+Do not send Lead merely because:
+- Someone opened WhatsApp.
+- Someone clicked a contact button.
+- Someone started filling a form.
+- Someone opened a modal.
+
+If no real lead-submission system exists, leave Lead tracking inactive and document the limitation.
+
+## 5.7 Schedule Tracking
+
+Only send Schedule when an actual appointment or booking has been successfully confirmed.
+
+Opening a calendar, selecting a time, or clicking an appointment CTA is not sufficient.
+
+## 5.8 TikTok Profile Tracking
+
+Official profile:
+
+https://www.tiktok.com/@profactoo1
+
+Track profile-link clicks separately.
+
+Do not incorrectly report a profile click as a successful TikTok follow.
+
+---
+
+# PART 6 — ATTRIBUTION & CAMPAIGN TRACKING
+
+Implement a proper attribution layer.
+
+The objective is to understand where visitors came from and which campaigns generate meaningful contact actions.
+
+## 6.1 URL Parameters
+
+Capture and preserve these parameters when present:
+
+- utm_source
+- utm_medium
+- utm_campaign
+- utm_content
+- utm_term
+- ttclid
+
+Also capture:
+- Initial landing URL.
+- Referrer.
+- Landing timestamp.
+- Current page path.
+
+Do not assume every visitor will have these parameters.
+
+## 6.2 TikTok Click ID
+
+Capture the `ttclid` query parameter from landing URLs.
+
+Preserve it using an appropriate first-party attribution mechanism.
+
+Do not lose it during:
+- Internal navigation.
+- CTA interactions.
+- Page transitions.
+- Website redirects.
+
+Do not invent a ttclid if it does not exist.
+
+## 6.3 Attribution Storage
+
+Implement an attribution service.
+
+Suggested file:
+
+`src/utils/attribution.ts`
+
+It should:
+
+- Read the original URL query parameters.
+- Extract TikTok click ID.
+- Extract UTM parameters.
+- Save the first-touch attribution.
+- Preserve the latest-touch attribution separately.
+- Make attribution information accessible to genuine lead flows.
+- Avoid collecting unnecessary personal data.
+- Respect applicable storage and cookie consent requirements.
+
+Use session storage when persistence beyond the active session is unnecessary.
+
+Use persistent first-party storage only with an appropriate consent mechanism and documented retention policy.
+
+## 6.4 Attribution Parameters in Events
+
+Include relevant page and attribution information in supported event payloads.
+
+Use the officially supported TikTok event parameters.
+
+Never send the business's own WhatsApp number as customer information.
+
+Never include sensitive customer data in event properties.
+
+## 6.5 WhatsApp Attribution Limitations
+
+Important:
+
+A browser-side WhatsApp link click can be measured.
+
+However, a normal external WhatsApp deep link cannot confirm that the visitor sent the message or that the business received a qualified lead.
+
+Do not claim that a WhatsApp click equals a confirmed conversation.
+
+For actual lead-level attribution, document the possibility of integrating WhatsApp Business Platform or a CRM webhook in a future phase.
+
+---
+
+# PART 7 — EVENTS API 2.0 (SERVER-SIDE TRACKING READINESS)
+
+Design the tracking architecture to support TikTok Events API 2.0 in addition to browser-side Pixel tracking.
+
+This must be implemented securely and conditionally.
+
+## 7.1 Browser Pixel
+
+Implement the browser Pixel as the active first tracking layer.
+
+## 7.2 Server-Side Events API
+
+If the existing project environment has a suitable backend:
+
+- Prepare a secure server-side Events API 2.0 integration.
+- Use TikTok's current official endpoint and payload schema.
+- Store the Events API access token as a server-side secret.
+- Never expose the access token in frontend JavaScript.
+- Never use a VITE_ variable for a private server token.
+- Never invent credentials.
+- Provide configuration documentation for the token.
+
+If there is no backend or no access token available:
+
+- Do not pretend server-side tracking is active.
+- Do not build a fake API integration.
+- Keep the browser Pixel working.
+- Document the exact prerequisites for activating Events API 2.0.
+
+## 7.3 Event Deduplication
+
+If the same conversion is sent through both the Browser Pixel and Events API:
+
+Implement event deduplication.
+
+Requirements:
+
+- Generate one unique event_id for each real action.
+- Use the same event_id for the browser and server copies of that same action.
+- Use the same event name.
+- Do not reuse the same event_id for unrelated actions.
+- Follow TikTok's current deduplication requirements.
+- Verify the deduplication status through Events Manager.
+
+Do not enable server-side duplicate events without proper event_id handling.
+
+---
+
+# PART 8 — PRIVACY & DATA PROTECTION
+
+Implement a responsible tracking architecture.
+
+Requirements:
+
+- Provide an appropriate privacy notice.
+- Provide a cookie/marketing tracking consent mechanism where required.
+- Respect user consent.
+- Do not load or use non-essential advertising cookies contrary to the applicable consent requirements.
+- Make it possible to change consent preferences.
+- Avoid collecting sensitive personal data.
+- Do not send personal information in generic event properties.
+- Do not expose credentials.
+- Do not collect visitor information without a legitimate purpose.
+
+Advanced Matching:
+
+Only implement Advanced Matching when:
+- The actual customer data exists through a legitimate business process.
+- The user has been appropriately informed and required consent is obtained.
+- The implementation follows TikTok's current requirements.
+- The relevant fields are transmitted securely and appropriately normalized/hashed.
+
+Never use Profacto's public business phone number as visitor identity information.
+
+Keep Advanced Matching disabled by default if no suitable customer data collection process exists.
+
+---
+
+# PART 9 — TRACKING DEBUGGING & QUALITY ASSURANCE
+
+Do not consider Pixel integration finished merely because the script appears in the source code.
+
+Perform actual implementation checks.
+
+### 9.1 Browser Verification
+
+Inspect:
+
+- Browser console.
+- Network requests.
+- Pixel SDK loading.
+- Duplicate initialization.
+- Duplicate conversion events.
+- Event parameters.
+- Missing Pixel ID handling.
+- Mobile browser behavior.
+
+### 9.2 TikTok Verification
+
+Use:
+
+- TikTok Pixel Helper browser extension.
+- TikTok Ads Manager.
+- Events Manager.
+- Test Events.
+- Pixel Overview.
+- Event activity diagnostics.
+
+Verify that the correct Pixel is receiving events.
+
+### 9.3 Test Each Event
+
+Run the following scenarios:
+
+1. Open the landing page.
+   - Expect PageView.
+
+2. Open the main products/services section.
+   - Expect ViewContent once according to the defined visibility rule.
+
+3. Click a WhatsApp button.
+   - Expect Contact once.
+
+4. Click a telephone CTA.
+   - Expect Contact once.
+
+5. Click the TikTok profile link.
+   - Expect the configured custom event or internal analytics record.
+
+6. Submit a real valid lead form, if implemented.
+   - Expect Lead only after success.
+
+7. Complete an actual confirmed booking, if implemented.
+   - Expect Schedule.
+
+8. Refresh and repeat tests.
+   - Confirm no unintended duplicate initialization or automatic events.
+
+9. Test different devices and browsers.
+
+10. Test a landing URL with UTM parameters and ttclid.
+    - Confirm attribution preservation.
+
+Do not claim events have been verified in TikTok Events Manager unless actual access and verification were performed.
+
+---
+
+# PART 10 — RECOMMENDED FILE ARCHITECTURE
+
+Keep the project clean and modular.
+
+Suggested architecture:
+
+src/
+  config/
+    brand.ts
+    site.ts
+  components/
+    Navbar.tsx
+    Footer.tsx
+    WhatsAppButton.tsx
+    CookieConsent.tsx
+    common/
+  sections/
+    HeroSection.tsx
+    ServicesSection.tsx
+    AboutSection.tsx
+    GallerySection.tsx
+    WhyProfactoSection.tsx
+    HowItWorksSection.tsx
+    TestimonialsSection.tsx
+    FAQSection.tsx
+    ContactSection.tsx
+  utils/
+    tiktokPixel.ts
+    attribution.ts
+    whatsapp.ts
+    analytics.ts
+  types/
+    analytics.ts
+  App.tsx
+  main.tsx
+
+This is a suggested structure. Adapt it to the actual project and avoid unnecessary files.
+
+Create:
+- `.env.example`
+- README.md
+- Tracking documentation.
+
+Frontend configuration:
+
+VITE_PROFACTO_TIKTOK_PIXEL_ID=DBUOAARC77UCDH70RRQ0
+
+VITE_PROFACTO_WHATSAPP_NUMBER=201106365101
+
+Server-side configuration, only if required:
+
+TIKTOK_ACCESS_TOKEN=<SERVER_SIDE_SECRET>
+
+Never expose TIKTOK_ACCESS_TOKEN to the browser.
+
+---
+
+# PART 11 — PERFORMANCE, SEO & USER EXPERIENCE
+
+This website is primarily intended for traffic coming from TikTok.
+
+Prioritize:
+
+- Mobile-first responsiveness.
+- Fast loading.
+- Optimized images.
+- Modern responsive layouts.
+- Lazy-loaded media.
+- Minimal layout shifts.
+- Lightweight animations.
+- Accessible controls.
+- Clear navigation.
+- Arabic RTL support.
+- Proper metadata.
+- Open Graph image and descriptions.
+- Appropriate SEO title and description.
+- Social media sharing previews.
+
+Avoid excessive animation and unnecessarily large video files.
+
+Ensure that the website remains usable if TikTok tracking fails or the SDK cannot load.
+
+Conversion actions must not depend on a successful analytics request.
+
+---
+
+# PART 12 — DEVELOPMENT AND IMPLEMENTATION RULES
+
+Before making changes:
+
+1. Inspect the current project structure.
+2. Inspect installed dependencies.
+3. Understand the current build setup.
+4. Identify reusable components.
+5. Review the supplied brand assets.
+6. Plan the page sections.
+7. Establish the tracking architecture.
+
+During implementation:
+
+- Use clean TypeScript.
+- Avoid unnecessary use of any.
+- Use modular and reusable components.
+- Keep business content separate from layout code.
+- Keep brand configuration centralized.
+- Keep tracking functions centralized.
+- Do not introduce unnecessary dependencies.
+- Do not break working features.
+- Do not create mock backend functionality.
+- Do not create fake reviews or testimonials.
+- Do not use placeholder content without labeling it.
+- Do not claim successful data transmission without evidence.
+
+Do not stop after generating a visual mockup.
+
+Implement the actual working components, navigation, CTAs, responsive layouts, and tracking functions.
+
+---
+
+# PART 13 — FINAL ACCEPTANCE CRITERIA
+
+The project is considered complete only when the following conditions are met.
+
+## Brand
+
+- Correct Profacto logo.
+- Correct red, black, and white palette.
+- Correct typography.
+- Visual consistency across devices.
+
+## Landing Page
+
+- Complete responsive layout.
+- Actual Profacto business messaging.
+- Functional navigation.
+- Functional WhatsApp CTAs.
+- Functional telephone links.
+- Functional TikTok profile link.
+- No dead buttons.
+- No fake functionality.
+
+## Contact
+
+The following must work:
+
+WhatsApp:
+https://wa.me/201106365101
+
+Phone:
+tel:+201106365101
+
+TikTok:
+https://www.tiktok.com/@profactoo1
+
+## Tracking
+
+- Correct Pixel ID: DBUOAARC77UCDH70RRQ0.
+- One Pixel initialization.
+- PageView.
+- ViewContent.
+- Contact.
+- Lead only where a real successful lead exists.
+- Schedule only where a real booking is confirmed.
+- Separate TikTok profile click measurement.
+- Attribution capture.
+- UTM preservation.
+- ttclid preservation.
+- No duplicate conversion events.
+- Consent-aware tracking.
+- Optional secure Events API 2.0 readiness.
+
+## Technical
+
+- TypeScript checks pass.
+- Production build succeeds.
+- No critical runtime errors.
+- No broken images.
+- No mobile overflow.
+- No exposed credentials.
+- Tracking functions are documented.
+
+---
+
+# PART 14 — FINAL REPORT
+
+After implementing the website, provide a detailed final report.
+
+### A. Business Understanding
+Explain the verified Profacto business, target audience, positioning, and value proposition.
+
+### B. Design & Website
+Explain every implemented section and its behavior.
+
+### C. Technical Architecture
+Show the folder structure, components, configuration, and libraries.
+
+### D. TikTok Tracking Configuration
+Document:
+- Pixel ID.
+- Pixel loading method.
+- Event names.
+- Event triggers.
+- Event parameters.
+- Attribution implementation.
+- Consent implementation.
+- Events API 2.0 status.
+- Deduplication implementation, if applicable.
+
+### E. Environment Setup
+Show exact environment variables and where to configure them.
+
+### F. Verification Results
+Report actual test results, including which tests passed, failed, or remain unverified.
+
+### G. Remaining Requirements
+List anything that still requires:
+- TikTok Ads Manager access.
+- Server-side access tokens.
+- Official brand assets.
+- Additional business information.
+- External integrations.
+
+Clearly distinguish:
+- Implemented.
+- Tested and verified.
+- Prepared but not activated.
+- Requires external configuration.
+
+---
+
+# FINAL DIRECTIVE
+
+Build a distinctive, professional, conversion-focused Profacto landing page with a reliable and measurable TikTok advertising integration.
+
+The actual business information and the supplied 2026 Brand Guideline are the source of truth.
+
+Use the provided WhatsApp number and the exact Profacto TikTok Pixel ID.
+
+Do not reuse any previous project's business configuration.
+
+Prioritize real conversion behavior, accurate tracking, clean implementation, and a premium brand experience.
+
+Start by inspecting the available project and sources, then proceed with implementation. Do not stop at the planning stage.

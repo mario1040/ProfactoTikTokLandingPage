@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --profacto-red: #bf2531;
+    --profacto-red-hover: #a11d27;
+    --profacto-black: #0f0e0e;
+    --profacto-surface-dark: #171616;
+    --profacto-white: #ffffff;
+    --profacto-canvas-light: #f7f6f4;
+    --profacto-border: #e5e2de;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Noto Kufi Arabic', 'Arial Rounded MT Bold', 'Arial Rounded MT', 'Varela Round', sans-serif;
+  }
+
+  html[lang='en'] {
+    font-family: 'Arial Rounded MT Bold', 'Arial Rounded MT', 'Varela Round', 'Noto Kufi Arabic', sans-serif;
+  }
+
+  body {
+    background-color: var(--profacto-white);
+    color: var(--profacto-black);
+    overflow-x: clip;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+.font-en-brand {
+  font-family: 'Arial Rounded MT Bold', 'Arial Rounded MT', 'Varela Round', sans-serif;
+}
+
+.font-ar-brand {
+  font-family: 'Noto Kufi Arabic', sans-serif;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
