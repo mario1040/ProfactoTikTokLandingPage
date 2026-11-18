@@ -9,10 +9,9 @@ import { WhatsAppButton } from './WhatsAppButton';
 interface FooterProps {
   lang: Language;
   onToggleLang: (next: Language) => void;
-  onOpenPrivacy: () => void;
 }
 
-export function Footer({ lang, onToggleLang, onOpenPrivacy }: FooterProps) {
+export function Footer({ lang, onToggleLang }: FooterProps) {
   return (
     <footer className="bg-[#0F0E0E] text-white border-t border-white/10">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-12 space-y-10">
@@ -72,7 +71,7 @@ export function Footer({ lang, onToggleLang, onOpenPrivacy }: FooterProps) {
             </ul>
           </div>
 
-          {/* Direct Contact & Preferences */}
+          {/* Direct Contact & Language Switch */}
           <div className="md:col-span-4 space-y-3">
             <h3 className="text-xs font-semibold text-white/50">
               {lang === 'ar' ? 'التواصل المباشر' : 'Direct Contact'}
@@ -97,13 +96,6 @@ export function Footer({ lang, onToggleLang, onOpenPrivacy }: FooterProps) {
                 >
                   {lang === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}
                 </button>
-                <button
-                  type="button"
-                  onClick={onOpenPrivacy}
-                  className="px-3 py-1.5 text-xs font-medium rounded-md border border-white/20 text-white/90 hover:border-[#BF2531] transition-colors"
-                >
-                  {SITE_COPY.footer.consentLink[lang]}
-                </button>
               </div>
             </div>
           </div>
@@ -111,13 +103,9 @@ export function Footer({ lang, onToggleLang, onOpenPrivacy }: FooterProps) {
 
         <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-white/55">
           <p>{SITE_COPY.footer.copyright[lang]}</p>
-          <button
-            type="button"
-            onClick={onOpenPrivacy}
-            className="hover:text-white transition-colors underline underline-offset-4"
-          >
-            {SITE_COPY.footer.privacyLink[lang]}
-          </button>
+          <span dir="ltr" className="font-en-brand text-white/60">
+            {PROFACTO_BRAND.handle}
+          </span>
         </div>
       </div>
     </footer>

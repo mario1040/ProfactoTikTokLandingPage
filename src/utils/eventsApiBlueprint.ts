@@ -31,7 +31,8 @@ export interface EventsApi2Payload {
       referrer?: string;
     };
     properties?: {
-      content_type?: string;
+      content_id?: string;
+      content_type?: 'product' | 'product_group' | 'destination' | 'hotel' | 'flight' | 'vehicle';
       content_name?: string;
       content_category?: string;
     };
@@ -56,6 +57,7 @@ export function buildEventsApi2Payload(params: {
   attribution?: AttributionSnapshot | null;
   clientIp?: string;
   userAgent?: string;
+  contentId?: string;
   contentName?: string;
   contentCategory?: string;
   testEventCode?: string;
@@ -88,6 +90,7 @@ export function buildEventsApi2Payload(params: {
           ...(params.referrer ? { referrer: params.referrer } : {}),
         },
         properties: {
+          ...(params.contentId ? { content_id: params.contentId, content_type: 'product_group' } : {}),
           ...(params.contentName ? { content_name: params.contentName } : {}),
           ...(params.contentCategory ? { content_category: params.contentCategory } : {}),
         },

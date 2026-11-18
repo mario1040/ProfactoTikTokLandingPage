@@ -6,17 +6,16 @@
 - **SDK Loader**: `src/utils/tiktokPixel.ts`
 - **Initialization Rule**: Loads `https://analytics.tiktok.com/i18n/pixel/events.js?sdkid=DBUOAARC77UCDH70RRQ0&lib=ttq` **at most once** per session, guarded by module state and `window.__PROFACTO_TTQ_INITIALIZED__`.
 
-## 2. Immediate Tracking & Privacy Controls
-- Consent status in `localStorage` (`profacto_tracking_consent_v1`) defaults to `'granted'` so the TikTok Pixel initializes immediately when the website opens and captures `PageView` without a blocking cookie banner.
-- Visitors who wish to opt out can open **Privacy Policy / سياسة الخصوصية** in the footer and switch to **Essential Only**, persisting `'denied'`.
+## 2. Immediate Tracking Architecture
+- The TikTok Pixel (`DBUOAARC77UCDH70RRQ0`) initializes unconditionally as soon as the site opens (`App.tsx` -> `initTikTokPixel()`), loading `events.js` once and dispatching `PageView` immediately with no blocking banners or consent toggles.
 
 ## 3. Event Strategy
 | Visitor Action | Event Name | Implementation | Notes |
 |---|---|---|---|
-| Initial consented load | `PageView` | `ttq.page()` inside `bootstrapTikTokStub()` | Fires once per load; no duplicate manual `PageView`. |
-| Viewing Specialties (`#services`) | `ViewContent` | `IntersectionObserver` in `ServicesSection.tsx` | Fires once when >=25% visible (`trackViewContent`). |
-| Clicking any WhatsApp CTA | `Contact` | `WhatsAppButton.tsx` -> `trackProfactoWhatsAppClick()` | Debounced per physical action (`800ms`), unique `event_id`. Never fires `Lead` or `Schedule`. |
-| Clicking phone link (`tel:+201106365101`) | `Contact` | `ContactSection.tsx` / `Footer.tsx` -> `trackContact('phone', ...)` | Fires once per click with unique `event_id`. |
+| Initial site open | `PageView` | `ttq.page()` inside `bootstrapTikTokStub()` | Fires once immediately on open; no duplicate manual `PageView`. |
+| Viewing Specialties (`#services`) | `ViewContent` | `IntersectionObserver` in `ServicesSection.tsx` | Fires once when >=25% visible (`trackViewContent`) with `content_id: 'profacto_custom_kitchens_dressing_rooms'`, `content_type: 'product_group'`, and matching `contents[]`. |
+| Clicking any WhatsApp CTA | `Contact` | `WhatsAppButton.tsx` -> `trackProfactoWhatsAppClick()` | Debounced per physical action (`800ms`), unique `event_id`, `content_id`, and `content_type: 'product_group'`. Never fires `Lead` or `Schedule`. |
+| Clicking phone link (`tel:+201106365101`) | `Contact` | `ContactSection.tsx` / `Footer.tsx` -> `trackContact('phone', ...)` | Fires once per click with unique `event_id` and `content_id`. |
 | Clicking TikTok profile (`@profactoo1`) | `TikTokProfileClick` | `trackTikTokProfileClick()` | Recorded in internal session analytics; external Pixel custom fire is gated behind `customEventsEnabled.TikTokProfileClick` until configured in Events Manager. |
 | Lead form submission | `Lead` | `trackVerifiedLead()` | **Intentionally inactive**: no backend CRM lead form exists yet. |
 | Confirmed booking | `Schedule` | `trackConfirmedSchedule()` | **Intentionally inactive**: no online booking engine exists yet. |

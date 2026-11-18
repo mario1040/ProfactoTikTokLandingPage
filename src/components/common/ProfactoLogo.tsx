@@ -18,11 +18,15 @@ export function ProfactoLogo({
     size === 'sm' ? 'w-8 h-8' : size === 'lg' ? 'w-12 h-12' : 'w-10 h-10';
 
   const wordmarkColor = tone === 'dark' ? 'text-white' : 'text-[#0F0E0E]';
+  const badgeSurfaceClass =
+    tone === 'dark'
+      ? 'bg-[#171616] border border-white/15'
+      : 'bg-[#171616] border border-black/10';
 
   return (
     <span className="inline-flex items-center gap-3 shrink-0 whitespace-nowrap">
       <span
-        className={`${boxSizeClass} relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-[#BF2531] shrink-0`}
+        className={`${boxSizeClass} relative inline-flex items-center justify-center overflow-hidden rounded-lg ${badgeSurfaceClass} shrink-0`}
       >
         {!imgError ? (
           <img

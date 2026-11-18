@@ -26,6 +26,7 @@ export function ServicesSection({ lang }: ServicesSectionProps) {
         for (const entry of entries) {
           if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
             trackViewContent({
+              contentId: 'profacto_custom_kitchens_dressing_rooms',
               contentKey: 'profacto_specialties_section',
               contentName: 'Profacto Custom Kitchens & Dressing Rooms',
               contentCategory: 'specialties',

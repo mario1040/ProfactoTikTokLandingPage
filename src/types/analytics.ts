@@ -1,7 +1,5 @@
 export type Language = 'ar' | 'en';
 
-export type ConsentStatus = 'pending' | 'granted' | 'denied';
-
 export type ConversionContext =
   | 'hero'
   | 'navbar'
@@ -33,6 +31,13 @@ export interface StoredAttribution {
   latestTouch: AttributionSnapshot;
 }
 
+export interface TikTokContentItem {
+  content_id: string;
+  content_type?: 'product' | 'product_group' | 'destination' | 'hotel' | 'flight' | 'vehicle';
+  content_name?: string;
+  content_category?: string;
+}
+
 export interface InternalAnalyticsRecord {
   id: string;
   eventName: string;
@@ -40,17 +45,18 @@ export interface InternalAnalyticsRecord {
   channel: 'tiktok_pixel' | 'internal';
   context?: string;
   timestamp: string;
-  consentStatus: ConsentStatus;
   deliveredToPixel: boolean;
   attribution: AttributionSnapshot | null;
-  metadata?: Record<string, string | number | boolean | undefined>;
+  metadata?: Record<string, string | number | boolean | TikTokContentItem[] | undefined>;
 }
 
 export interface TikTokEventPayload {
-  content_type?: string;
+  content_id?: string;
+  content_type?: 'product' | 'product_group' | 'destination' | 'hotel' | 'flight' | 'vehicle';
   content_name?: string;
   content_category?: string;
+  contents?: TikTokContentItem[];
   description?: string;
   query?: string;
-  [key: string]: string | number | boolean | undefined;
+  [key: string]: string | number | boolean | TikTokContentItem[] | undefined;
 }

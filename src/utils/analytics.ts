@@ -1,4 +1,4 @@
-import type { ConsentStatus, InternalAnalyticsRecord } from '../types/analytics';
+import type { InternalAnalyticsRecord, TikTokContentItem } from '../types/analytics';
 import { getStoredAttribution } from './attribution';
 
 const INTERNAL_EVENTS_CAP = 50;
@@ -19,9 +19,8 @@ export function recordInternalEvent(params: {
   eventId: string;
   channel: 'tiktok_pixel' | 'internal';
   context?: string;
-  consentStatus: ConsentStatus;
   deliveredToPixel: boolean;
-  metadata?: Record<string, string | number | boolean | undefined>;
+  metadata?: Record<string, string | number | boolean | TikTokContentItem[] | undefined>;
 }): InternalAnalyticsRecord {
   const attribution = getStoredAttribution();
   const record: InternalAnalyticsRecord = {
@@ -31,7 +30,6 @@ export function recordInternalEvent(params: {
     channel: params.channel,
     context: params.context,
     timestamp: new Date().toISOString(),
-    consentStatus: params.consentStatus,
     deliveredToPixel: params.deliveredToPixel,
     attribution: attribution ? attribution.latestTouch : null,
     metadata: params.metadata,

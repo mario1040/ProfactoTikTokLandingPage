@@ -13,7 +13,8 @@ import {
   canSendServerEventsApi,
 } from './eventsApiBlueprint';
 import {
-  getConsentStatus,
+  buildContactPayload,
+  buildViewContentPayload,
   resetTrackingGuardsForTest,
   shouldAllowActionDispatch,
   trackConfirmedSchedule,
@@ -24,12 +25,33 @@ import {
 } from './tiktokPixel';
 import { buildProfactoWhatsAppMessage, getProfactoWhatsAppHref } from './whatsapp';
 
-test('brand configuration uses exact Profacto Pixel ID and WhatsApp number and immediate tracking default', () => {
+test('brand configuration uses exact Profacto Pixel ID and WhatsApp number', () => {
   assert.equal(PROFACTO_BRAND.tracking.tiktokPixelId, 'DBUOAARC77UCDH70RRQ0');
   assert.equal(PROFACTO_BRAND.contact.phoneInternational, '+201106365101');
   assert.equal(PROFACTO_BRAND.contact.whatsappNumber, '201106365101');
   assert.equal(PROFACTO_BRAND.tiktokUrl, 'https://www.tiktok.com/@profactoo1');
-  assert.equal(getConsentStatus(), 'granted');
+});
+
+test('ViewContent and Contact payloads always include non-empty content_id and valid content_type', () => {
+  const vcPayload = buildViewContentPayload({
+    contentId: 'profacto_custom_kitchens_dressing_rooms',
+    contentKey: 'profacto_specialties_section',
+    contentName: 'Profacto Custom Kitchens & Dressing Rooms',
+    contentCategory: 'specialties',
+    description: 'Main services section viewed',
+  });
+
+  assert.equal(vcPayload.content_id, 'profacto_custom_kitchens_dressing_rooms');
+  assert.equal(vcPayload.content_type, 'product_group');
+  assert.ok(Array.isArray(vcPayload.contents) && vcPayload.contents.length === 1);
+  assert.equal(vcPayload.contents[0].content_id, 'profacto_custom_kitchens_dressing_rooms');
+  assert.equal(vcPayload.contents[0].content_type, 'product_group');
+
+  const contactPayload = buildContactPayload('whatsapp', 'hero');
+  assert.equal(contactPayload.content_id, 'profacto_whatsapp_hero');
+  assert.equal(contactPayload.content_type, 'product_group');
+  assert.ok(Array.isArray(contactPayload.contents) && contactPayload.contents.length === 1);
+  assert.equal(contactPayload.contents[0].content_id, 'profacto_whatsapp_hero');
 });
 
 test('attribution parser captures UTM parameters and ttclid when present, and never invents them when absent', () => {
@@ -111,11 +133,13 @@ test('rapid double-clicks on same conversion action are debounced, while distinc
   assert.equal(shouldAllowActionDispatch('contact:whatsapp:kitchens', 1950, 800), true);
 
   const firstView = trackViewContent({
+    contentId: 'profacto_custom_kitchens_dressing_rooms',
     contentKey: 'specialties_section',
     contentName: 'Custom Kitchens & Dressing Rooms',
     contentCategory: 'specialties',
   });
   const secondView = trackViewContent({
+    contentId: 'profacto_custom_kitchens_dressing_rooms',
     contentKey: 'specialties_section',
     contentName: 'Custom Kitchens & Dressing Rooms',
     contentCategory: 'specialties',
@@ -135,6 +159,7 @@ test('rapid double-clicks on same conversion action are debounced, while distinc
   const history = getSessionAnalyticsHistory();
   assert.equal(history.some((e) => e.eventName === 'Lead'), false);
   assert.equal(history.some((e) => e.eventName === 'Schedule'), false);
+  assert.equal(history.some((e) => e.eventName === 'ViewContent'), true);
   assert.equal(history.some((e) => e.eventName === 'Contact'), true);
   assert.equal(history.some((e) => e.eventName === 'TikTokProfileClick'), true);
 });
@@ -160,6 +185,7 @@ test('Events API 2.0 blueprint stays inactive without server secret and never ex
     eventTimeUnixSeconds: 1795000000,
     pageUrl: 'https://profacto.example/',
     attribution,
+    contentId: 'profacto_whatsapp_hero',
     contentName: 'profacto_whatsapp_contact',
     contentCategory: 'hero',
   });
@@ -168,5 +194,6 @@ test('Events API 2.0 blueprint stays inactive without server secret and never ex
   assert.equal(payload.data[0].event, 'Contact');
   assert.equal(payload.data[0].event_id, 'contact_unique_123');
   assert.equal(payload.data[0].user.ttclid, 'tt_srv_99');
+  assert.equal(payload.data[0].properties?.content_id, 'profacto_whatsapp_hero');
   assert.equal(JSON.stringify(payload).includes('201106365101'), false);
 });

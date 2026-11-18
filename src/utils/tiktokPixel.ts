@@ -1,13 +1,13 @@
 import { PROFACTO_BRAND } from '../config/brand';
 import type {
-  ConsentStatus,
   ConversionContext,
+  TikTokContentItem,
   TikTokEventPayload,
 } from '../types/analytics';
 import { generateEventId, recordInternalEvent } from './analytics';
 import { getActiveAttributionContext } from './attribution';
 
-const CONSENT_STORAGE_KEY = 'profacto_tracking_consent_v1';
+const LEGACY_CONSENT_STORAGE_KEY = 'profacto_tracking_consent_v1';
 const RAPID_CLICK_DEBOUNCE_MS = 800;
 
 interface TTQInstance {
@@ -41,35 +41,18 @@ let moduleScriptInjected = false;
 const viewedContentKeys = new Set<string>();
 const lastActionTimestamp = new Map<string, number>();
 
-export function getConsentStatus(): ConsentStatus {
-  if (typeof window === 'undefined') return 'granted';
-  try {
-    const stored = window.localStorage.getItem(CONSENT_STORAGE_KEY);
-    if (stored === 'denied') {
-      return 'denied';
-    }
-  } catch {
-    // Ignore storage read restrictions
-  }
-  return 'granted';
-}
-
-export function setConsentStatus(status: Exclude<ConsentStatus, 'pending'>): void {
-  if (typeof window === 'undefined') return;
-  try {
-    window.localStorage.setItem(CONSENT_STORAGE_KEY, status);
-  } catch {
-    // Ignore storage write restrictions
-  }
-
-  if (status === 'granted') {
-    initTikTokPixel();
-  }
-}
-
 export function isPixelInitialized(): boolean {
   if (typeof window === 'undefined') return false;
   return Boolean(modulePixelInitialized || window.__PROFACTO_TTQ_INITIALIZED__);
+}
+
+function clearLegacyConsentPreference(): void {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.removeItem(LEGACY_CONSENT_STORAGE_KEY);
+  } catch {
+    // Ignore storage access restrictions
+  }
 }
 
 function bootstrapTikTokStub(pixelId: string): void {
@@ -184,7 +167,7 @@ function bootstrapTikTokStub(pixelId: string): void {
   const ttq = window.ttq;
   if (ttq && typeof ttq.load === 'function') {
     ttq.load(pixelId);
-    // Base code sends the single initial PageView once
+    // Base code sends the single initial PageView once immediately on site open
     if (typeof ttq.page === 'function') {
       ttq.page();
     }
@@ -196,7 +179,6 @@ function bootstrapTikTokStub(pixelId: string): void {
       eventId: generateEventId('pv'),
       channel: 'tiktok_pixel',
       context: 'initial_base_load',
-      consentStatus: 'granted',
       deliveredToPixel: true,
       metadata: {
         pixelId,
@@ -208,13 +190,10 @@ function bootstrapTikTokStub(pixelId: string): void {
 export function initTikTokPixel(): boolean {
   if (typeof window === 'undefined') return false;
 
+  clearLegacyConsentPreference();
+
   const pixelId = PROFACTO_BRAND.tracking.tiktokPixelId;
   if (!pixelId) {
-    return false;
-  }
-
-  // Respect explicit privacy consent: never load non-essential advertising cookies unless granted
-  if (getConsentStatus() !== 'granted') {
     return false;
   }
 
@@ -236,27 +215,24 @@ function safeTrackStandardEvent(
   eventId: string,
   context: string,
 ): boolean {
-  const consentStatus = getConsentStatus();
   let delivered = false;
 
-  if (consentStatus === 'granted') {
-    if (!isPixelInitialized()) {
-      initTikTokPixel();
-    }
+  if (!isPixelInitialized()) {
+    initTikTokPixel();
+  }
 
-    try {
-      if (typeof window !== 'undefined' && window.ttq && typeof window.ttq.track === 'function') {
-        const attribution = getActiveAttributionContext();
-        const sanitizedPayload: TikTokEventPayload = {
-          ...payload,
-          ...attribution,
-        };
-        window.ttq.track(eventName, sanitizedPayload, { event_id: eventId });
-        delivered = true;
-      }
-    } catch {
-      delivered = false;
+  try {
+    if (typeof window !== 'undefined' && window.ttq && typeof window.ttq.track === 'function') {
+      const attribution = getActiveAttributionContext();
+      const sanitizedPayload: TikTokEventPayload = {
+        ...payload,
+        ...attribution,
+      };
+      window.ttq.track(eventName, sanitizedPayload, { event_id: eventId });
+      delivered = true;
     }
+  } catch {
+    delivered = false;
   }
 
   recordInternalEvent({
@@ -264,7 +240,6 @@ function safeTrackStandardEvent(
     eventId,
     channel: delivered ? 'tiktok_pixel' : 'internal',
     context,
-    consentStatus,
     deliveredToPixel: delivered,
     metadata: payload,
   });
@@ -290,7 +265,61 @@ export function resetTrackingGuardsForTest(): void {
   lastActionTimestamp.clear();
 }
 
+export function buildViewContentPayload(params: {
+  contentId?: string;
+  contentKey: string;
+  contentName: string;
+  contentCategory: string;
+  description?: string;
+}): TikTokEventPayload {
+  const normalizedId =
+    (params.contentId || params.contentKey || 'profacto_custom_kitchens_dressing_rooms').trim() ||
+    'profacto_custom_kitchens_dressing_rooms';
+
+  const contentItem: TikTokContentItem = {
+    content_id: normalizedId,
+    content_type: 'product_group',
+    content_name: params.contentName,
+    content_category: params.contentCategory,
+  };
+
+  return {
+    content_id: normalizedId,
+    content_type: 'product_group',
+    content_name: params.contentName,
+    content_category: params.contentCategory,
+    contents: [contentItem],
+    ...(params.description ? { description: params.description } : {}),
+  };
+}
+
+export function buildContactPayload(
+  channel: 'whatsapp' | 'phone' | 'email',
+  context: ConversionContext | string = 'default',
+): TikTokEventPayload {
+  const cleanContext = context.trim() || 'default';
+  const contentId = `profacto_${channel}_${cleanContext}`;
+  const contentName = `profacto_${channel}_contact`;
+
+  return {
+    content_id: contentId,
+    content_type: 'product_group',
+    content_name: contentName,
+    content_category: cleanContext,
+    contents: [
+      {
+        content_id: contentId,
+        content_type: 'product_group',
+        content_name: contentName,
+        content_category: cleanContext,
+      },
+    ],
+    contact_method: channel,
+  };
+}
+
 export function trackViewContent(params: {
+  contentId?: string;
   contentKey: string;
   contentName: string;
   contentCategory: string;
@@ -305,11 +334,7 @@ export function trackViewContent(params: {
   const eventId = generateEventId('vc');
   safeTrackStandardEvent(
     'ViewContent',
-    {
-      content_name: params.contentName,
-      content_category: params.contentCategory,
-      description: params.description,
-    },
+    buildViewContentPayload(params),
     eventId,
     params.contentKey,
   );
@@ -329,11 +354,7 @@ export function trackContact(
   const eventId = generateEventId('contact');
   const delivered = safeTrackStandardEvent(
     'Contact',
-    {
-      content_name: `profacto_${channel}_contact`,
-      content_category: context,
-      contact_method: channel,
-    },
+    buildContactPayload(channel, context),
     eventId,
     `${channel}:${context}`,
   );
@@ -351,13 +372,11 @@ export function trackTikTokProfileClick(sourceSection: string): {
   }
 
   const eventId = generateEventId('ttprofile');
-  const consentStatus = getConsentStatus();
   let deliveredToPixel = false;
 
   // Fire custom TikTokProfileClick ONLY if explicitly enabled & configured in TikTok Events Manager
   if (
     PROFACTO_BRAND.tracking.customEventsEnabled.TikTokProfileClick &&
-    consentStatus === 'granted' &&
     typeof window !== 'undefined' &&
     window.ttq &&
     typeof window.ttq.track === 'function'
@@ -366,6 +385,8 @@ export function trackTikTokProfileClick(sourceSection: string): {
       window.ttq.track(
         'TikTokProfileClick',
         {
+          content_id: `profacto_tiktok_profile_${sourceSection}`,
+          content_type: 'product_group',
           content_name: 'profacto_tiktok_profile',
           content_category: sourceSection,
           ...getActiveAttributionContext(),
@@ -383,7 +404,6 @@ export function trackTikTokProfileClick(sourceSection: string): {
     eventId,
     channel: deliveredToPixel ? 'tiktok_pixel' : 'internal',
     context: sourceSection,
-    consentStatus,
     deliveredToPixel,
     metadata: {
       profileHandle: PROFACTO_BRAND.handle,
@@ -401,14 +421,15 @@ export function trackVerifiedLead(confirmedByServer: boolean, leadReferenceId?: 
   if (!confirmedByServer || !leadReferenceId) {
     return false;
   }
-  const consentStatus = getConsentStatus();
-  if (consentStatus !== 'granted' || typeof window === 'undefined' || !window.ttq?.track) {
+  if (typeof window === 'undefined' || !window.ttq?.track) {
     return false;
   }
   const eventId = generateEventId('lead');
   window.ttq.track(
     'Lead',
     {
+      content_id: `lead_${leadReferenceId}`,
+      content_type: 'product_group',
       content_name: 'verified_lead_submission',
       ...getActiveAttributionContext(),
     },
@@ -419,7 +440,6 @@ export function trackVerifiedLead(confirmedByServer: boolean, leadReferenceId?: 
     eventId,
     channel: 'tiktok_pixel',
     context: leadReferenceId,
-    consentStatus,
     deliveredToPixel: true,
   });
   return true;
@@ -432,14 +452,15 @@ export function trackConfirmedSchedule(confirmedBookingId?: string): boolean {
   if (!confirmedBookingId) {
     return false;
   }
-  const consentStatus = getConsentStatus();
-  if (consentStatus !== 'granted' || typeof window === 'undefined' || !window.ttq?.track) {
+  if (typeof window === 'undefined' || !window.ttq?.track) {
     return false;
   }
   const eventId = generateEventId('schedule');
   window.ttq.track(
     'Schedule',
     {
+      content_id: `schedule_${confirmedBookingId}`,
+      content_type: 'product_group',
       content_name: 'confirmed_consultation_booking',
       ...getActiveAttributionContext(),
     },
@@ -450,7 +471,6 @@ export function trackConfirmedSchedule(confirmedBookingId?: string): boolean {
     eventId,
     channel: 'tiktok_pixel',
     context: confirmedBookingId,
-    consentStatus,
     deliveredToPixel: true,
   });
   return true;

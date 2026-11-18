@@ -351,8 +351,6 @@ export const SITE_COPY = {
       ar: 'متخصصون في المطابخ الفاخرة وغرف الملابس المخصصة.',
       en: 'Specializing in high-end, custom kitchens and dressing rooms.',
     },
-    privacyLink: { ar: 'سياسة الخصوصية', en: 'Privacy Policy' },
-    consentLink: { ar: 'تفضيلات التتبع والكوكيز', en: 'Tracking & Cookie Preferences' },
     copyright: {
       ar: '© 2026 Profacto. جميع الحقوق محفوظة.',
       en: '© 2026 Profacto. All rights reserved.',

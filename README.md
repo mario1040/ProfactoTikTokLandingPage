@@ -29,4 +29,4 @@ TIKTOK_ACCESS_TOKEN=<SERVER_SIDE_SECRET>
 - `npx --yes tsx --test src/utils/tracking.test.ts` — Run unit tests for attribution, WhatsApp URL encoding, and Pixel event guards
 
 ## Tracking Architecture
-See [`TRACKING.md`](./TRACKING.md) for complete documentation of TikTok Pixel initialization, standard events (`PageView`, `ViewContent`, `Contact`), attribution preservation (`ttclid` + `utm_*`), consent gating, and Events API 2.0 readiness.
+See [`TRACKING.md`](./TRACKING.md) for complete documentation of immediate TikTok Pixel initialization, standard events (`PageView`, `ViewContent`, `Contact`), attribution preservation (`ttclid` + `utm_*`), and Events API 2.0 readiness.
